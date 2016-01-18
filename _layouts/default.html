@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Niklas' Lifesaving Gif Library</title>
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,800" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/main.css">
+  <meta name="viewport" content="initial-scale=1">
+</head>
+
+<body>
+
+  <header class="page-header">
+    <div class="img-preview">
+      <img src="hello/hello.gif" alt="" class="banner-img">
+      <img src="" id="preview" class="gif-preview">
+    </div>
+    <h1 id="my-gif-collection">Niklas' Lifesaving Gif Library</h1>
+
+    <p>Ahoy! This is my Lifesaving Gif collection. Hover to preview an image.</p>
+    <p>My role model was the <a href="http://gifs.joelglovier.com/">Gif collection</a> of <a href="http://joelglovier.com/">Joel</a>. Thanks for this, mate!</p>
+    <p>You also want an awesome jekyll-based Gif library? Fork this on GitHub at <a href="http://github.com/NiklasJordan/gifs">niklasjordan/gifs</a></p>
+    <p class="alert"><strong>Need help or want to say hello?</strong><br />Follow me on <a href="http://twitter.com/niklas_jordan">twitter</a> or send me an <a href="mailto:hello@niklasjordan.com">mail</a>.</p>
+
+  </header>
+  <div class="gif-listing">
+    <ul>
+      {% for gif in site.gifs %}
+      <li>{{gif}}
+        <ul>
+          {% directory path: gif %}
+          <li><a href="{{gif}}/{{ file.slug }}.gif" title="{{ file.name }}" class="gif">{{ file.name }}</a></li>
+          {% enddirectory %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <script type="text/javascript">
+    var preview = document.getElementById("preview");
+
+    function hoverListener(evt) {
+      preview.src = evt.target.href;
+    };
+
+    var links = document.getElementsByClassName("gif");
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener("mouseover", hoverListener);
+    }
+  </script>
+
+</body>
+
+</html>
